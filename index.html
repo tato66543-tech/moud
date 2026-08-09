@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MOUD | Luxury Fashion</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fff;
+            color: #111;
+        }
+
+        /* NAVBAR */
+
+        header {
+            width: 100%;
+            padding: 25px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            color: white;
+        }
+
+        .logo {
+            font-size: 28px;
+            letter-spacing: 6px;
+            font-weight: 600;
+        }
+
+        nav {
+            display: flex;
+            gap: 35px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .icons {
+            display: flex;
+            gap: 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* HERO */
+
+        .hero {
+            height: 100vh;
+            min-height: 650px;
+
+            background:
+                linear-gradient(
+                    rgba(0,0,0,0.25),
+                    rgba(0,0,0,0.45)
+                ),
+                url("https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=2000&q=90");
+
+            background-size: cover;
+            background-position: center;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(60px, 10vw, 150px);
+            letter-spacing: 20px;
+            font-weight: 400;
+        }
+
+        .hero-content p {
+            margin: 20px 0 35px;
+            font-size: 14px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        .shop-btn {
+            display: inline-block;
+            padding: 16px 45px;
+            background: white;
+            color: black;
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 3px;
+            transition: 0.3s;
+        }
+
+        .shop-btn:hover {
+            background: #c7a44b;
+            color: white;
+        }
+
+        /* COLLECTION */
+
+        .collection {
+            padding: 100px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            font-weight: 400;
+            letter-spacing: 5px;
+        }
+
+        .section-title p {
+            margin-top: 12px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .product {
+            cursor: pointer;
+        }
+
+        .product-image {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            object-fit: cover;
+            display: block;
+            transition: 0.5s;
+        }
+
+        .product:hover .product-image {
+            transform: scale(1.02);
+        }
+
+        .product-info {
+            padding: 18px 0;
+        }
+
+        .product-name {
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            color: #777;
+            font-size: 13px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #111;
+            color: white;
+            padding: 70px 5%;
+            text-align: center;
+        }
+
+        footer .footer-logo {
+            font-size: 30px;
+            letter-spacing: 8px;
+            margin-bottom: 25px;
+        }
+
+        footer p {
+            color: #aaa;
+            font-size: 12px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 900px) {
+
+            nav {
+                display: none;
+            }
+
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero-content h1 {
+                letter-spacing: 10px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .products {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .collection {
+                padding: 70px 15px;
+            }
+
+            header {
+                padding: 20px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        MOUD
+    </div>
+
+    <nav>
+        <a href="#">New In</a>
+        <a href="#">Men</a>
+        <a href="#">Women</a>
+        <a href="#">Collections</a>
+    </nav>
+
+    <div class="icons">
+        ♡
+        🛒
+    </div>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>MOUD</h1>
+
+        <p>New Collection 2026</p>
+
+        <a href="#collection" class="shop-btn">
+            SHOP NOW
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- COLLECTION -->
+
+<section class="collection" id="collection">
+
+    <div class="section-title">
+
+        <h2>NEW COLLECTION</h2>
+
+        <p>Discover the latest MOUD pieces</p>
+
+    </div>
+
+
+    <div class="products">
+
+        <div class="product">
+
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80"
+                alt="MOUD T-Shirt"
+            >
+
+            <div class="product-info">
+
+                <div class="product-name">
+                    MOUD Essential T-Shirt
+                </div>
+
+                <div class="product-price">
+                    EGP 1,499
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="product">
+
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=800&q=80"
+                alt="MOUD Shirt"
+            >
+
+            <div class="product-info">
+
+                <div class="product-name">
+                    MOUD Oversized Shirt
+                </div>
+
+                <div class="product-price">
+                    EGP 1,899
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="product">
+
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80"
+                alt="MOUD Collection"
+            >
+
+            <div class="product-info">
+
+                <div class="product-name">
+                    MOUD Signature Jacket
+                </div>
+
+                <div class="product-price">
+                    EGP 2,999
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="product">
+
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=800&q=80"
+                alt="MOUD Fashion"
+            >
+
+            <div class="product-info">
+
+                <div class="product-name">
+                    MOUD Premium Collection
+                </div>
+
+                <div class="product-price">
+                    EGP 3,499
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <div class="footer-logo">
+        MOUD
+    </div>
+
+    <p>
+        © 2026 MOUD. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+</body>
+</html>
