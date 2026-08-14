@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOUD Admin</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f5f5f5;
+      color: #111;
+    }
+
+    header {
+      background: #111;
+      color: white;
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      letter-spacing: 4px;
+    }
+
+    .admin {
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .title {
+      margin-bottom: 25px;
+    }
+
+    .title h1 {
+      font-size: 30px;
+    }
+
+    .title p {
+      color: #777;
+      margin-top: 8px;
+    }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 3px 15px rgba(0,0,0,.07);
+    }
+
+    .card h3 {
+      color: #777;
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    .card strong {
+      font-size: 28px;
+    }
+
+    .section {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      box-shadow: 0 3px 15px rgba(0,0,0,.07);
+    }
+
+    .section h2 {
+      margin-bottom: 25px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .input-group.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input {
+      padding: 13px;
+      border: 1px solid #ddd;
+      border-radius: 7px;
+      font-size: 15px;
+    }
+
+    .sizes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 5px;
+    }
+
+    .size {
+      border: 1px solid #ccc;
+      padding: 10px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      background: white;
+    }
+
+    .size input {
+      display: none;
+    }
+
+    .size.active {
+      background: #111;
+      color: white;
+      border-color: #111;
+    }
+
+    .image-box {
+      border: 2px dashed #ccc;
+      padding: 30px;
+      text-align: center;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .image-box:hover {
+      border-color: #111;
+    }
+
+    #preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    #preview img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    button {
+      border: none;
+      background: #111;
+      color: white;
+      padding: 14px 25px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    button:hover {
+      background: #333;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .product {
+      border: 1px solid #eee;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .product img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      background: #eee;
+    }
+
+    .product-info {
+      padding: 15px;
+    }
+
+    .product-info h3 {
+      margin-bottom: 8px;
+    }
+
+    .product-info p {
+      color: #666;
+      margin-bottom: 12px;
+    }
+
+    .delete {
+      background: #b00020;
+      width: 100%;
+    }
+
+    @media(max-width: 800px) {
+      .dashboard,
+      .form-grid,
+      .products {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">MOUD</div>
+  <div class="admin">ADMIN DASHBOARD</div>
+</header>
+
+<div class="container">
+
+  <div class="title">
+    <h1>لوحة إدارة MOUD</h1>
+    <p>إدارة المنتجات والأسعار والمقاسات والصور</p>
+  </div>
+
+  <div class="dashboard">
+
+    <div class="card">
+      <h3>عدد المنتجات</h3>
+      <strong id="productCount">0</strong>
+    </div>
+
+    <div class="card">
+      <h3>الطلبات</h3>
+      <strong>0</strong>
+    </div>
+
+    <div class="card">
+      <h3>حالة المتجر</h3>
+      <strong>Online</strong>
+    </div>
+
+  </div>
+
+  <div class="section">
+
+    <h2>إضافة منتج جديد</h2>
+
+    <form id="productForm">
+
+      <div class="form-grid">
+
+        <div class="input-group">
+          <label>اسم المنتج</label>
+          <input
+            type="text"
+            id="productName"
+            placeholder="مثال: MOUD Premium T-Shirt"
+            required
+          >
+        </div>
+
+        <div class="input-group">
+          <label>السعر بالجنيه المصري</label>
+          <input
+            type="number"
+            id="productPrice"
+            placeholder="مثال: 1499"
+            required
+          >
+        </div>
+
+        <div class="input-group full">
+
+          <label>المقاسات</label>
+
+          <div class="sizes">
+
+            <label class="size">
+              <input type="checkbox" value="S">
+              S
+            </label>
+
+            <label class="size">
+              <input type="checkbox" value="M">
+              M
+            </label>
+
+            <label class="size">
+              <input type="checkbox" value="L">
+              L
+            </label>
+
+            <label class="size">
+              <input type="checkbox" value="XL">
+              XL
+            </label>
+
+            <label class="size">
+              <input type="checkbox" value="XXL">
+              XXL
+            </label>
+
+          </div>
+
+        </div>
+
+        <div class="input-group full">
+
+          <label>صور المنتج</label>
+
+          <div class="image-box"
+               onclick="document.getElementById('productImages').click()">
+
+            اضغط هنا لاختيار صور المنتج
+
+            <input
+              type="file"
+              id="productImages"
+              accept="image/*"
+              multiple
+              hidden
+            >
+
+          </div>
+
+          <div id="preview"></div>
+
+        </div>
+
+        <div class="input-group full">
+
+          <button type="submit">
+            + إضافة المنتج
+          </button>
+
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+
+  <div class="section">
+
+    <h2>المنتجات الحالية</h2>
+
+    <div class="products" id="products"></div>
+
+  </div>
+
+</div>
+
+<script>
+
+let products = JSON.parse(
+  localStorage.getItem("moudProducts")
+) || [];
+
+const form = document.getElementById("productForm");
+const imageInput = document.getElementById("productImages");
+const preview = document.getElementById("preview");
+
+let selectedImages = [];
+
+document.querySelectorAll(".size input").forEach(input => {
+
+  input.addEventListener("change", function() {
+
+    this.parentElement.classList.toggle(
+      "active",
+      this.checked
+    );
+
+  });
+
+});
+
+imageInput.addEventListener("change", function() {
+
+  selectedImages = [];
+
+  preview.innerHTML = "";
+
+  [...this.files].forEach(file => {
+
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+
+      selectedImages.push(e.target.result);
+
+      const img = document.createElement("img");
+
+      img.src = e.target.result;
+
+      preview.appendChild(img);
+
+    };
+
+    reader.readAsDataURL(file);
+
+  });
+
+});
+
+form.addEventListener("submit", function(e) {
+
+  e.preventDefault();
+
+  const name =
+    document.getElementById("productName").value;
+
+  const price =
+    document.getElementById("productPrice").value;
+
+  const sizes =
+    [...document.querySelectorAll(".size input:checked")]
+    .map(input => input.value);
+
+  if (sizes.length === 0) {
+
+    alert("اختار مقاس واحد على الأقل");
+
+    return;
+
+  }
+
+  if (selectedImages.length === 0) {
+
+    alert("اختار صورة واحدة على الأقل");
+
+    return;
+
+  }
+
+  const product = {
+
+    id: Date.now(),
+
+    name: name,
+
+    price: price,
+
+    sizes: sizes,
+
+    images: selectedImages
+
+  };
+
+  products.push(product);
+
+  localStorage.setItem(
+    "moudProducts",
+    JSON.stringify(products)
+  );
+
+  alert("تم إضافة المنتج بنجاح ✅");
+
+  form.reset();
+
+  preview.innerHTML = "";
+
+  selectedImages = [];
+
+  document.querySelectorAll(".size").forEach(size => {
+
+    size.classList.remove("active");
+
+  });
+
+  displayProducts();
+
+});
+
+function displayProducts() {
+
+  const container =
+    document.getElementById("products");
+
+  container.innerHTML = "";
+
+  document.getElementById("productCount").innerText =
+    products.length;
+
+  products.forEach(product => {
+
+    const div = document.createElement("div");
+
+    div.className = "product";
+
+    div.innerHTML = `
+
+      <img src="${product.images[0]}">
+
+      <div class="product-info">
+
+        <h3>${product.name}</h3>
+
+        <p>${Number(product.price).toLocaleString()} EGP</p>
+
+        <p>
+          المقاسات: ${product.sizes.join(" - ")}
+        </p>
+
+        <button
+          class="delete"
+          onclick="deleteProduct(${product.id})">
+          حذف المنتج
+        </button>
+
+      </div>
+
+    `;
+
+    container.appendChild(div);
+
+  });
+
+}
+
+function deleteProduct(id) {
+
+  if (!confirm("هل تريد حذف المنتج؟")) return;
+
+  products =
+    products.filter(product => product.id !== id);
+
+  localStorage.setItem(
+    "moudProducts",
+    JSON.stringify(products)
+  );
+
+  displayProducts();
+
+}
+
+displayProducts();
+
+</script>
+
+</body>
+</html>
